@@ -80,7 +80,6 @@ class LoginScreen extends StatelessWidget {
                     30), // Espaço entre os campos de entrada e o botão "Entrar".
             ElevatedButton(
               onPressed: () {
-                // Adicione a lógica de autenticação aqui.
               },
               style: ElevatedButton.styleFrom(
                 primary: buttonColor, // Cor de fundo roxa (#5E548E).
