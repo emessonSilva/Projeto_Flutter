@@ -9,9 +9,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'ClackMovie',
-      home: const LoginScreen(),
+      home: LoginScreen(),
     );
   }
 }
@@ -21,53 +21,65 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color buttonColor = const Color(0xFF5E548E); // Cor #5E548E
+    Color buttonColor = const Color(0xFF5E548E);
+    // Color themeColor = const Color(0xFF9F86C0);
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent, // Remove o fundo.
-        elevation: 0, // Remove a sombra da barra de aplicativo.
-        title: Text(
-          'ClackMovie',
-          style: TextStyle(
-            fontSize: 40, // Tamanho do título.
-            color: Colors.black, // Cor preta para o título.
-          ),
-        ),
-        centerTitle: true, // Centraliza o título na barra de aplicativo.
-      ),
-      body: Center(
+      body: SingleChildScrollView(
+        reverse: true,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40),
-              child: Align(
-                alignment: Alignment.centerLeft, // Alinha o texto à esquerda.
-                child: Text(
-                  'Login',
-                  style: TextStyle(
-                    fontSize: 35,
-                    color: Colors.black, // Cor preta para o título.
+            Container(
+              margin: const EdgeInsets.only(
+                top: 60,
+              ),
+              width: 150,
+              height: 150,
+              child: Image.asset('assets/img_claquete.png'),
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 5),
+              child: const Text(
+                'ClackMovie',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 40),
+              child: const Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 40,
+                ),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Login',
+                    style: TextStyle(
+                      fontSize: 30,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
               ),
             ),
-            const SizedBox(
-                height: 20), // Espaço entre o título e os campos de entrada.
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40),
+            const SizedBox(height: 20),
+            const Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 40,
+              ),
               child: TextField(
                 decoration: InputDecoration(
                   labelText: 'Nome de Usuário',
                 ),
               ),
             ),
-            const SizedBox(
-                height:
-                    10), // Espaço entre o campo de nome de usuário e a senha.
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40),
+            const SizedBox(height: 10),
+            const Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 40,
+              ),
               child: TextField(
                 obscureText: true,
                 decoration: InputDecoration(
@@ -76,18 +88,50 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(
-                height:
-                    30), // Espaço entre os campos de entrada e o botão "Entrar".
-            ElevatedButton(
-              onPressed: () {
-                // Adicione a lógica de autenticação aqui.
-              },
-              style: ElevatedButton.styleFrom(
-                primary: buttonColor, // Cor de fundo roxa (#5E548E).
-                minimumSize: Size(200, 50), // Largura e altura do botão.
-              ),
-              child: const Text('Entrar'),
+              height: 15,
             ),
+            const Text(
+              'Esqueceu a senha?',
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.black,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(
+                top: 50,
+              ),
+              child: ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: buttonColor,
+                  minimumSize: const Size(250, 50),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                child: const Text(
+                  'Entrar',
+                  style: TextStyle(
+                    fontSize: 18,
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(
+                top: 30,
+              ),
+              child: const Text(
+                'Ainda não tem cadastro? Registre-se',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            )
           ],
         ),
       ),
