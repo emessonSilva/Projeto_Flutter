@@ -5,7 +5,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key});
+  const MyApp({super.key, Key? keys});
 
   @override
   Widget build(BuildContext context) {
@@ -17,12 +17,11 @@ class MyApp extends StatelessWidget {
 }
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key});
+  const LoginScreen({super.key, Key? keys});
 
   @override
   Widget build(BuildContext context) {
     Color buttonColor = const Color(0xFF5E548E);
-    // Color themeColor = const Color(0xFF9F86C0);
 
     return Scaffold(
       body: SingleChildScrollView(
