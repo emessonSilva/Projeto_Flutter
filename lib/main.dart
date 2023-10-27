@@ -29,21 +29,29 @@ class LoginScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            //Imagem do app
             Container(
               margin: const EdgeInsets.only(
                 top: 60,
               ),
               width: 150,
               height: 150,
-              child: Image.asset('assets/img_claquete.png'),
+              child: Image.asset('assets/images/img_claquete.png'),
             ),
+
+            //Nome do app
             Container(
-              margin: const EdgeInsets.only(top: 5),
+              margin: const EdgeInsets.only(top: 2),
               child: const Text(
                 'ClackMovie',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
+                style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w600,
+                    fontFamily: 'Poppins'),
               ),
             ),
+
+            //Texto de Login
             Container(
               margin: const EdgeInsets.only(top: 40),
               child: const Padding(
@@ -55,48 +63,73 @@ class LoginScreen extends StatelessWidget {
                   child: Text(
                     'Login',
                     style: TextStyle(
-                      fontSize: 30,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w600,
+                        fontSize: 30,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w600,
+                        fontFamily: 'Poppins'),
+                  ),
+                ),
+              ),
+            ),
+
+            //Texto de Email ou Nome de Usuário
+            Container(
+              margin: const EdgeInsets.only(top: 20),
+              child: const Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 40,
+                ),
+                child: TextField(
+                  decoration: InputDecoration(
+                    labelText: 'Email ou Nome de Usuário',
+                    prefixIcon: Icon(
+                      Icons.alternate_email_rounded,
+                      color: Color(0xFF9F86C0),
+                    ),
+                    labelStyle: TextStyle(
+                      fontFamily: 'Poppins',
                     ),
                   ),
                 ),
               ),
             ),
-            const SizedBox(height: 20),
-            const Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 40,
-              ),
-              child: TextField(
-                decoration: InputDecoration(
-                  labelText: 'Nome de Usuário',
+
+            //Texto de Senha
+            Container(
+              margin: const EdgeInsets.only(top: 10),
+              child: const Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 40,
+                ),
+                child: TextField(
+                  decoration: InputDecoration(
+                    labelText: 'Senha',
+                    prefixIcon: Icon(
+                      Icons.lock_rounded,
+                      color: Color(0xFF9F86C0),
+                    ),
+                    labelStyle: TextStyle(
+                      fontFamily: 'Poppins',
+                    ),
+                  ),
                 ),
               ),
             ),
-            const SizedBox(height: 10),
-            const Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 40,
-              ),
-              child: TextField(
-                obscureText: true,
-                decoration: InputDecoration(
-                  labelText: 'Senha',
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            const Text(
-              'Esqueceu a senha?',
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.black,
-                fontWeight: FontWeight.w500,
+
+            //Texto de Esqueceu a senha?
+            Container(
+              margin: const EdgeInsets.only(top: 20),
+              child: const Text(
+                'Esqueceu a senha?',
+                style: TextStyle(
+                    fontSize: 14.5,
+                    color: Color(0xFF646464),
+                    fontWeight: FontWeight.w500,
+                    fontFamily: 'Poppins'),
               ),
             ),
+
+            //Botão e o texto dentro(Entrar)
             Container(
               margin: const EdgeInsets.only(
                 top: 50,
@@ -112,12 +145,12 @@ class LoginScreen extends StatelessWidget {
                 ),
                 child: const Text(
                   'Entrar',
-                  style: TextStyle(
-                    fontSize: 18,
-                  ),
+                  style: TextStyle(fontSize: 18, fontFamily: 'Poppins'),
                 ),
               ),
             ),
+
+            //Texto de Ainda não tem cadastro? Registre-se
             Container(
               margin: const EdgeInsets.only(
                 top: 30,
@@ -125,10 +158,10 @@ class LoginScreen extends StatelessWidget {
               child: const Text(
                 'Ainda não tem cadastro? Registre-se',
                 style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w500,
-                ),
+                    fontSize: 14.5,
+                    color: Color(0xFF646464),
+                    fontWeight: FontWeight.w500,
+                    fontFamily: 'Poppins'),
               ),
             )
           ],
