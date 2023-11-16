@@ -29,6 +29,14 @@ class LoginScreen extends StatelessWidget {
       );
     }
 
+    void navigateToPasswordRecoveryScreen() {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => const PasswordRecoveryScreen(),
+        ),
+      );
+    }
+
     return Scaffold(
       body: SingleChildScrollView(
         reverse: true,
@@ -125,13 +133,16 @@ class LoginScreen extends StatelessWidget {
             //Texto de Esqueceu a senha?
             Container(
               margin: const EdgeInsets.only(top: 20),
-              child: const Text(
-                'Esqueceu a senha?',
-                style: TextStyle(
-                    fontSize: 14.5,
-                    color: Color(0xFF646464),
-                    fontWeight: FontWeight.w500,
-                    fontFamily: 'Poppins'),
+              child: InkWell(
+                onTap: navigateToPasswordRecoveryScreen,
+                child: const Text(
+                  'Esqueceu a senha?',
+                  style: TextStyle(
+                      fontSize: 14.5,
+                      color: Color(0xFF646464),
+                      fontWeight: FontWeight.w500,
+                      fontFamily: 'Poppins'),
+                ),
               ),
             ),
 
@@ -160,8 +171,7 @@ class LoginScreen extends StatelessWidget {
             Container(
               margin: const EdgeInsets.only(top: 30),
               child: InkWell(
-                onTap:
-                    navigateToRegisterScreen, // Navegar para a tela de cadastro
+                onTap: navigateToRegisterScreen,
                 child: const Text(
                   'Ainda não tem cadastro? Registre-se',
                   style: TextStyle(
@@ -172,14 +182,13 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
     );
   }
 }
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //Tela de cadastro
@@ -361,3 +370,28 @@ class RegisterScreen extends StatelessWidget {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //Tela de recuperar a senha
+
+class PasswordRecoveryScreen extends StatelessWidget {
+  const PasswordRecoveryScreen({super.key, Key? keys});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      //AppBar para colocar a seta
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back,
+          ),
+          onPressed: () {
+            Navigator.of(context).pop(); // Voltar para a tela anterior
+          },
+          color: Color(0xFF5E548E),
+          iconSize: 30,
+        ),
+      ),
+    );
+  }
+}
