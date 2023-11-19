@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const MyApp());
@@ -56,31 +57,30 @@ class LoginScreen extends StatelessWidget {
             //Nome do app
             Container(
               margin: const EdgeInsets.only(top: 2),
-              child: const Text(
+              child: Text(
                 'ClackMovie',
-                style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w600,
-                    fontFamily: 'Poppins'),
+                style: GoogleFonts.poppins().copyWith(
+                  fontSize: 24,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
 
             //Texto de Login
             Container(
-              margin: const EdgeInsets.only(top: 40),
-              child: const Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 40,
-                ),
+              margin: const EdgeInsets.only(top: 30),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 40),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
                     'Login',
-                    style: TextStyle(
-                        fontSize: 30,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w600,
-                        fontFamily: 'Poppins'),
+                    style: GoogleFonts.poppins().copyWith(
+                      fontSize: 30,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
               ),
@@ -89,43 +89,43 @@ class LoginScreen extends StatelessWidget {
             //Texto de Email ou Nome de Usuário
             Container(
               margin: const EdgeInsets.only(top: 20),
-              child: const Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 40,
-                ),
-                child: TextField(
-                  decoration: InputDecoration(
-                    labelText: 'Email ou Nome de Usuário',
-                    prefixIcon: Icon(
-                      Icons.alternate_email_rounded,
-                      color: Color(0xFF9F86C0),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 40),
+                child: Column(
+                  children: [
+                    TextField(
+                      decoration: InputDecoration(
+                        labelText: 'Email ou Nome de Usuário',
+                        labelStyle: GoogleFonts.poppins(),
+                        prefixIcon: Icon(
+                          Icons.alternate_email_rounded,
+                          color: Color(0xFF9F86C0),
+                        ),
+                      ),
                     ),
-                    labelStyle: TextStyle(
-                      fontFamily: 'Poppins',
-                    ),
-                  ),
+                  ],
                 ),
               ),
             ),
 
             //Texto de Senha
             Container(
-              margin: const EdgeInsets.only(top: 10),
-              child: const Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 40,
-                ),
-                child: TextField(
-                  decoration: InputDecoration(
-                    labelText: 'Senha',
-                    prefixIcon: Icon(
-                      Icons.lock_rounded,
-                      color: Color(0xFF9F86C0),
+              margin: const EdgeInsets.only(top: 20),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 40),
+                child: Column(
+                  children: [
+                    TextField(
+                      decoration: InputDecoration(
+                        labelText: 'Senha',
+                        labelStyle: GoogleFonts.poppins(),
+                        prefixIcon: Icon(
+                          Icons.lock_rounded,
+                          color: Color(0xFF9F86C0),
+                        ),
+                      ),
                     ),
-                    labelStyle: TextStyle(
-                      fontFamily: 'Poppins',
-                    ),
-                  ),
+                  ],
                 ),
               ),
             ),
@@ -135,14 +135,12 @@ class LoginScreen extends StatelessWidget {
               margin: const EdgeInsets.only(top: 20),
               child: InkWell(
                 onTap: navigateToPasswordRecoveryScreen,
-                child: const Text(
-                  'Esqueceu a senha?',
-                  style: TextStyle(
+                child: Text('Esqueceu a senha?',
+                    style: GoogleFonts.poppins().copyWith(
                       fontSize: 14.5,
                       color: Color(0xFF646464),
                       fontWeight: FontWeight.w500,
-                      fontFamily: 'Poppins'),
-                ),
+                    )),
               ),
             ),
 
@@ -160,10 +158,10 @@ class LoginScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                child: const Text(
-                  'Entrar',
-                  style: TextStyle(fontSize: 18, fontFamily: 'Poppins'),
-                ),
+                child: Text('Entrar',
+                    style: GoogleFonts.poppins().copyWith(
+                      fontSize: 18,
+                    )),
               ),
             ),
 
@@ -172,15 +170,12 @@ class LoginScreen extends StatelessWidget {
               margin: const EdgeInsets.only(top: 30),
               child: InkWell(
                 onTap: navigateToRegisterScreen,
-                child: const Text(
-                  'Ainda não tem cadastro? Registre-se',
-                  style: TextStyle(
-                    fontSize: 14.5,
-                    color: Color(0xFF646464),
-                    fontWeight: FontWeight.w500,
-                    fontFamily: 'Poppins',
-                  ),
-                ),
+                child: Text('Ainda não tem cadastro? Registre-se',
+                    style: GoogleFonts.poppins().copyWith(
+                      fontSize: 14.5,
+                      color: Color(0xFF646464),
+                      fontWeight: FontWeight.w500,
+                    )),
               ),
             ),
           ],
@@ -222,13 +217,12 @@ class RegisterScreen extends StatelessWidget {
               // Texto "Cadastre-se"
               Container(
                 margin: const EdgeInsets.only(top: 10, bottom: 20),
-                child: const Text(
+                child: Text(
                   'Cadastre-se',
-                  style: TextStyle(
+                  style: GoogleFonts.poppins().copyWith(
                     fontSize: 32,
                     color: Colors.black,
                     fontWeight: FontWeight.w600,
-                    fontFamily: 'Poppins',
                   ),
                 ),
               ),
@@ -236,21 +230,21 @@ class RegisterScreen extends StatelessWidget {
               // Texto Nome de Usuário
               Container(
                 margin: const EdgeInsets.only(top: 20),
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 40,
-                  ),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      labelText: 'Nome de Usuário',
-                      prefixIcon: Icon(
-                        Icons.person_outline,
-                        color: Color(0xFF9F86C0),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 40),
+                  child: Column(
+                    children: [
+                      TextField(
+                        decoration: InputDecoration(
+                          labelText: 'Nome de Usuário',
+                          labelStyle: GoogleFonts.poppins(),
+                          prefixIcon: Icon(
+                            Icons.person_outline,
+                            color: Color(0xFF9F86C0),
+                          ),
+                        ),
                       ),
-                      labelStyle: TextStyle(
-                        fontFamily: 'Poppins',
-                      ),
-                    ),
+                    ],
                   ),
                 ),
               ),
@@ -258,21 +252,21 @@ class RegisterScreen extends StatelessWidget {
               //Texto Número de telefone
               Container(
                 margin: const EdgeInsets.only(top: 10),
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 40,
-                  ),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      labelText: 'Número de telefone',
-                      prefixIcon: Icon(
-                        Icons.phone,
-                        color: Color(0xFF9F86C0),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 40),
+                  child: Column(
+                    children: [
+                      TextField(
+                        decoration: InputDecoration(
+                          labelText: 'Número de Telefone',
+                          labelStyle: GoogleFonts.poppins(),
+                          prefixIcon: Icon(
+                            Icons.phone,
+                            color: Color(0xFF9F86C0),
+                          ),
+                        ),
                       ),
-                      labelStyle: TextStyle(
-                        fontFamily: 'Poppins',
-                      ),
-                    ),
+                    ],
                   ),
                 ),
               ),
@@ -280,21 +274,21 @@ class RegisterScreen extends StatelessWidget {
               //Texto Email
               Container(
                 margin: const EdgeInsets.only(top: 10),
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 40,
-                  ),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      labelText: 'Email',
-                      prefixIcon: Icon(
-                        Icons.alternate_email_rounded,
-                        color: Color(0xFF9F86C0),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 40),
+                  child: Column(
+                    children: [
+                      TextField(
+                        decoration: InputDecoration(
+                          labelText: 'Email',
+                          labelStyle: GoogleFonts.poppins(),
+                          prefixIcon: Icon(
+                            Icons.alternate_email_rounded,
+                            color: Color(0xFF9F86C0),
+                          ),
+                        ),
                       ),
-                      labelStyle: TextStyle(
-                        fontFamily: 'Poppins',
-                      ),
-                    ),
+                    ],
                   ),
                 ),
               ),
@@ -302,24 +296,26 @@ class RegisterScreen extends StatelessWidget {
               //Texto Senha
               Container(
                 margin: const EdgeInsets.only(top: 10),
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 40,
-                  ),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      labelText: 'Senha',
-                      prefixIcon: Icon(
-                        Icons.lock_rounded,
-                        color: Color(0xFF9F86C0),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 40),
+                  child: Column(
+                    children: [
+                      TextField(
+                        decoration: InputDecoration(
+                          labelText: 'Senha',
+                          labelStyle: GoogleFonts
+                              .poppins(), // Aplicando a fonte Poppins
+                          prefixIcon: Icon(
+                            Icons.lock_rounded,
+                            color: Color(0xFF9F86C0),
+                          ),
+                        ),
                       ),
-                      labelStyle: TextStyle(
-                        fontFamily: 'Poppins',
-                      ),
-                    ),
+                    ],
                   ),
                 ),
               ),
+
               //Botão Cadastrar
               Container(
                 margin: const EdgeInsets.only(
@@ -340,9 +336,11 @@ class RegisterScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  child: const Text(
+                  child: Text(
                     'Cadastrar',
-                    style: TextStyle(fontSize: 18, fontFamily: 'Poppins'),
+                    style: GoogleFonts.poppins().copyWith(
+                      fontSize: 18,
+                    ),
                   ),
                 ),
               ),
@@ -354,15 +352,12 @@ class RegisterScreen extends StatelessWidget {
                   onTap: () {
                     Navigator.of(context).pop(); // Retorna à tela anterior
                   },
-                  child: const Text(
-                    'Já possui uma conta? Entre',
-                    style: TextStyle(
-                      fontSize: 14.5,
-                      color: Color(0xFF646464),
-                      fontWeight: FontWeight.w500,
-                      fontFamily: 'Poppins',
-                    ),
-                  ),
+                  child: Text('Já possui uma conta? Entre',
+                      style: GoogleFonts.poppins().copyWith(
+                        fontSize: 14.5,
+                        color: Color(0xFF646464),
+                        fontWeight: FontWeight.w500,
+                      )),
                 ),
               ),
             ],
@@ -424,7 +419,7 @@ class PasswordRecoveryScreen extends StatelessWidget {
 
 //Tela de escolha de gêneros
 class GenreScreen extends StatefulWidget {
-  const GenreScreen({Key? key}) : super(key: key);
+  const GenreScreen({super.key, Key? keys});
 
   @override
   _GenreScreenState createState() => _GenreScreenState();
@@ -481,13 +476,10 @@ class _GenreScreenState extends State<GenreScreen> {
                       ),
                       Container(
                         margin: const EdgeInsets.only(top: 6),
-                        child: const Text(
+                        child: Text(
                           'ClackMovie',
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600,
-                            fontFamily: 'Poppins',
-                          ),
+                          style: GoogleFonts.poppins().copyWith(
+                              fontSize: 12, fontWeight: FontWeight.w600),
                         ),
                       ),
                     ],
@@ -496,11 +488,11 @@ class _GenreScreenState extends State<GenreScreen> {
               ],
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.all(45),
+          Padding(
+            padding: const EdgeInsets.all(45),
             child: Text(
               'Quais tipos de filmes você gosta?',
-              style: TextStyle(fontSize: 20),
+              style: GoogleFonts.poppins(fontSize: 18),
             ),
           ),
           Expanded(
@@ -583,3 +575,8 @@ class _GenreScreenState extends State<GenreScreen> {
     );
   }
 }
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+
+//Tela Home
