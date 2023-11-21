@@ -38,6 +38,15 @@ class LoginScreen extends StatelessWidget {
       );
     }
 
+    void navigateToHomeScreen(BuildContext context) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => HomeScreen(),
+        ),
+      );
+    }
+
     return Scaffold(
       body: SingleChildScrollView(
         reverse: true,
@@ -150,7 +159,9 @@ class LoginScreen extends StatelessWidget {
                 top: 50,
               ),
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  navigateToHomeScreen(context);
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF5E548E),
                   minimumSize: const Size(250, 50),
@@ -158,10 +169,12 @@ class LoginScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                child: Text('Entrar',
-                    style: GoogleFonts.poppins().copyWith(
-                      fontSize: 18,
-                    )),
+                child: Text(
+                  'Entrar',
+                  style: GoogleFonts.poppins().copyWith(
+                    fontSize: 18,
+                  ),
+                ),
               ),
             ),
 
@@ -576,7 +589,134 @@ class _GenreScreenState extends State<GenreScreen> {
   }
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////////////
 
 //Tela Home
+class HomeScreen extends StatelessWidget {
+  HomeScreen({super.key, Key? keys});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(8.0, 26.0, 8.0, 8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    flex: 3,
+                    child: Container(
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Row(
+                        children: [
+                          const SizedBox(width: 8),
+                          Icon(
+                            Icons.search,
+                            color: Color(0xFF7D7D7D),
+                          ),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: TextField(
+                              decoration: InputDecoration(
+                                hintText: 'Digite o nome do filme',
+                                border: InputBorder.none,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                  IconButton(
+                    icon: Icon(
+                      Icons.filter_alt_rounded,
+                      color: Color(0xFF9F86C0),
+                    ),
+                    onPressed: () {
+                      // Implementar a funcionalidade de filtro aqui
+                    },
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                'RECOMENDAÇÕES',
+                style: GoogleFonts.poppins().copyWith(
+                  fontSize: 22,
+                ),
+              ),
+            ),
+            GridView.builder(
+              shrinkWrap: true,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 1.0,
+              ),
+              itemCount: 3,
+              itemBuilder: (BuildContext context, int index) {
+                if (index == 0) {
+                  return movieCard(
+                    'Terrifier 2',
+                    'https://t.ctcdn.com.br/ENz3LFCDlWe9-_SPt0us3b19pKM=/640x360/smart/i645465.jpeg',
+                    'Descrição do Filme',
+                  );
+                } else if (index == 1) {
+                  return movieCard(
+                    'Scream 6',
+                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyvwZbtzQpeflX71rForQScUVAQC_UrOX14g&usqp=CAU',
+                    'Descrição do Filme',
+                  );
+                } else if (index == 2) {
+                  return movieCard(
+                    'Scream 5',
+                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4jIuF3iCLaT9dJzEsOaNaLUNV8UIE0jCO8g&usqp=CAU',
+                    'Descrição do Filme',
+                  );
+                }
+                return Container();
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget movieCard(String title, String imgPath, String description) {
+    return GestureDetector(
+      onTap: () {
+        // Navigate to the movie details screen
+      },
+      child: Container(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            Image.network(
+              imgPath,
+              fit: BoxFit.cover,
+              height: 120.0,
+            ),
+            SizedBox(height: 4),
+            Text(
+              title,
+              style: GoogleFonts.poppins().copyWith(
+                fontSize: 16,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
