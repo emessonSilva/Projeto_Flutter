@@ -47,6 +47,24 @@ class LoginScreen extends StatelessWidget {
       );
     }
 
+    // void navigateToListScreen(BuildContext context) {
+    //   Navigator.pushReplacement(
+    //     context,
+    //     MaterialPageRoute(
+    //       builder: (context) =>  ListScreen(),
+    //     ),
+    //   );
+    // }
+
+    // void navigateToAddMovieScreen(BuildContext context) {
+    //   Navigator.pushReplacement(
+    //     context,
+    //     MaterialPageRoute(
+    //       builder: (context) => HomeScreen(),
+    //     ),
+    //   );
+    // }
+
     return Scaffold(
       body: SingleChildScrollView(
         reverse: true,
@@ -431,8 +449,16 @@ class PasswordRecoveryScreen extends StatelessWidget {
 ////////////////////////////////////////////////////////////////////////////////////////////
 
 //Tela de escolha de gêneros
+
+class Genre {
+  final String name;
+  final String emoji;
+
+  Genre({required this.name, required this.emoji});
+}
+
 class GenreScreen extends StatefulWidget {
-  const GenreScreen({super.key, Key? keys});
+  const GenreScreen({Key? key}) : super(key: key);
 
   @override
   _GenreScreenState createState() => _GenreScreenState();
@@ -440,19 +466,20 @@ class GenreScreen extends StatefulWidget {
 
 class _GenreScreenState extends State<GenreScreen> {
   final List<bool> _isSelected = List.generate(12, (_) => false);
-  final List<String> genres = [
-    'Suspense',
-    'Ação',
-    'Comédia',
-    'Romance',
-    'Drama',
-    'Ficção Científica',
-    'Animação',
-    'Fantasia',
-    'Documentário',
-    'Mistério',
-    'Aventura',
-    'Thriller',
+
+  final List<Genre> genres = [
+    Genre(name: 'Musical', emoji: '🎶'),
+    Genre(name: 'Ação', emoji: '💥'),
+    Genre(name: 'Comédia', emoji: '🤣'),
+    Genre(name: 'Romance', emoji: '🥰'),
+    Genre(name: 'Drama', emoji: '😳'),
+    Genre(name: 'Ficção Científica', emoji: '👽'),
+    Genre(name: 'Animação', emoji: '😄'),
+    Genre(name: 'Fantasia', emoji: '😴'),
+    Genre(name: 'Documentário', emoji: '📖'),
+    Genre(name: 'Terror', emoji: '😱'),
+    Genre(name: 'Aventura', emoji: '🤠'),
+    Genre(name: 'História', emoji: '🦖'),
   ];
 
   @override
@@ -492,7 +519,9 @@ class _GenreScreenState extends State<GenreScreen> {
                         child: Text(
                           'ClackMovie',
                           style: GoogleFonts.poppins().copyWith(
-                              fontSize: 12, fontWeight: FontWeight.w600),
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
                     ],
@@ -520,7 +549,7 @@ class _GenreScreenState extends State<GenreScreen> {
                         decoration: BoxDecoration(
                           border: Border.all(
                             color: _isSelected[index]
-                                ? Colors.amber
+                                ? const Color(0xFF5E548E)
                                 : Colors.black26,
                           ),
                           borderRadius: BorderRadius.circular(20.0),
@@ -534,9 +563,12 @@ class _GenreScreenState extends State<GenreScreen> {
                           child: Card(
                             child: Row(
                               children: [
-                                Icon(Icons.movie),
+                                Text(
+                                  genres[index].emoji,
+                                  style: TextStyle(fontSize: 20),
+                                ),
                                 SizedBox(width: 16),
-                                Text(genres[index]),
+                                Text(genres[index].name),
                               ],
                             ),
                           ),
@@ -555,7 +587,7 @@ class _GenreScreenState extends State<GenreScreen> {
                         decoration: BoxDecoration(
                           border: Border.all(
                             color: _isSelected[newIndex]
-                                ? Colors.amber
+                                ? const Color(0xFF5E548E)
                                 : Colors.black26,
                           ),
                           borderRadius: BorderRadius.circular(20.0),
@@ -569,9 +601,12 @@ class _GenreScreenState extends State<GenreScreen> {
                           child: Card(
                             child: Row(
                               children: [
-                                Icon(Icons.movie),
+                                Text(
+                                  genres[newIndex].emoji,
+                                  style: TextStyle(fontSize: 20),
+                                ),
                                 SizedBox(width: 16),
-                                Text(genres[newIndex]),
+                                Text(genres[newIndex].name),
                               ],
                             ),
                           ),
@@ -592,99 +627,202 @@ class _GenreScreenState extends State<GenreScreen> {
 ///////////////////////////////////////////////////////////////////////////////////////
 
 //Tela Home
+
+class Movie {
+  final String title;
+  final String imgPath;
+  final String description;
+
+  Movie({
+    required this.title,
+    required this.imgPath,
+    required this.description,
+  });
+}
+
 class HomeScreen extends StatelessWidget {
-  HomeScreen({super.key, Key? keys});
+  HomeScreen({Key? key}) : super(key: key);
+
+  final List<Movie> movies = [
+    Movie(
+      title: 'Terrifier 2',
+      imgPath:
+          'https://t.ctcdn.com.br/ENz3LFCDlWe9-_SPt0us3b19pKM=/640x360/smart/i645465.jpeg',
+      description: 'Descrição do Filme 1',
+    ),
+    Movie(
+      title: 'Scream 6',
+      imgPath:
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyvwZbtzQpeflX71rForQScUVAQC_UrOX14g&usqp=CAU',
+      description: 'Descrição do Filme 2',
+    ),
+    Movie(
+      title: 'Scream 2',
+      imgPath:
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyvwZbtzQpeflX71rForQScUVAQC_UrOX14g&usqp=CAU',
+      description: 'Descrição do Filme 2',
+    ),
+    Movie(
+      title: 'Scream 3',
+      imgPath:
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyvwZbtzQpeflX71rForQScUVAQC_UrOX14g&usqp=CAU',
+      description: 'Descrição do Filme 2',
+    ),
+    Movie(
+      title: 'Scream 4',
+      imgPath:
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyvwZbtzQpeflX71rForQScUVAQC_UrOX14g&usqp=CAU',
+      description: 'Descrição do Filme 2',
+    ),
+    Movie(
+      title: 'Scream 5',
+      imgPath:
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyvwZbtzQpeflX71rForQScUVAQC_UrOX14g&usqp=CAU',
+      description: 'Descrição do Filme 2',
+    ),
+    Movie(
+      title: 'Scream 5',
+      imgPath:
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyvwZbtzQpeflX71rForQScUVAQC_UrOX14g&usqp=CAU',
+      description: 'Descrição do Filme 2',
+    ),
+    Movie(
+      title: 'Scream 5',
+      imgPath:
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyvwZbtzQpeflX71rForQScUVAQC_UrOX14g&usqp=CAU',
+      description: 'Descrição do Filme 2',
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
+    int crossAxisCount = 2;
+
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(8.0, 26.0, 8.0, 8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                    flex: 3,
-                    child: Container(
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Row(
-                        children: [
-                          const SizedBox(width: 8),
-                          Icon(
-                            Icons.search,
-                            color: Color(0xFF7D7D7D),
-                          ),
-                          const SizedBox(width: 8),
-                          Expanded(
-                            child: TextField(
-                              decoration: InputDecoration(
-                                hintText: 'Digite o nome do filme',
-                                border: InputBorder.none,
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            pinned: true,
+            backgroundColor: Colors.transparent,
+            flexibleSpace: Container(
+              decoration: BoxDecoration(
+                color: Colors.transparent,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(8.0, 40.0, 8.0, 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      flex: 3,
+                      child: Container(
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: Colors.grey[200],
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: const Row(
+                          children: [
+                            SizedBox(width: 8),
+                            Icon(
+                              Icons.search,
+                              color: Color(0xFF7D7D7D),
+                            ),
+                            SizedBox(width: 8),
+                            Expanded(
+                              child: TextField(
+                                decoration: InputDecoration(
+                                  hintText: 'Digite o nome do filme',
+                                  border: InputBorder.none,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(width: 10),
-                  IconButton(
-                    icon: Icon(
-                      Icons.filter_alt_rounded,
-                      color: Color(0xFF9F86C0),
+                    SizedBox(width: 6),
+                    IconButton(
+                      icon: Icon(
+                        Icons.filter_alt_rounded,
+                        color: Color(0xFF9F86C0),
+                      ),
+                      onPressed: () {
+                        // Implementar a funcionalidade de filtro aqui
+                      },
                     ),
-                    onPressed: () {
-                      // Implementar a funcionalidade de filtro aqui
-                    },
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
+          ),
+          SliverToBoxAdapter(
+            child: Container(
+              margin: const EdgeInsets.all(8),
               child: Text(
                 'RECOMENDAÇÕES',
                 style: GoogleFonts.poppins().copyWith(
                   fontSize: 22,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w400,
                 ),
               ),
             ),
-            GridView.builder(
-              shrinkWrap: true,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 1.0,
+          ),
+          SliverGrid(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: crossAxisCount,
+              crossAxisSpacing: 1.0,
+              mainAxisSpacing: 1.0,
+            ),
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                return movieCard(movies[index]);
+              },
+              childCount: movies.length,
+            ),
+          ),
+        ],
+      ),
+      bottomNavigationBar: BottomAppBar(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            IconButton(
+              icon: Icon(Icons.home, color: Color(0xFF9F86C0), size: 30),
+              onPressed: () {},
+            ),
+            IconButton(
+              icon: Icon(
+                Icons.settings,
+                color: Color(0xFF9F86C0),
+                size: 30,
               ),
-              itemCount: 3,
-              itemBuilder: (BuildContext context, int index) {
-                if (index == 0) {
-                  return movieCard(
-                    'Terrifier 2',
-                    'https://t.ctcdn.com.br/ENz3LFCDlWe9-_SPt0us3b19pKM=/640x360/smart/i645465.jpeg',
-                    'Descrição do Filme',
-                  );
-                } else if (index == 1) {
-                  return movieCard(
-                    'Scream 6',
-                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyvwZbtzQpeflX71rForQScUVAQC_UrOX14g&usqp=CAU',
-                    'Descrição do Filme',
-                  );
-                } else if (index == 2) {
-                  return movieCard(
-                    'Scream 5',
-                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4jIuF3iCLaT9dJzEsOaNaLUNV8UIE0jCO8g&usqp=CAU',
-                    'Descrição do Filme',
-                  );
-                }
-                return Container();
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ProfileScreen()),
+                );
+              },
+            ),
+            IconButton(
+              icon: Icon(Icons.format_list_bulleted_add,
+                  color: Color(0xFF9F86C0), size: 30),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ListScreen()),
+                );
+              },
+            ),
+            IconButton(
+              icon: Icon(Icons.add_box_outlined,
+                  color: Color(0xFF9F86C0), size: 30),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AddMovieScreen()),
+                );
               },
             ),
           ],
@@ -693,7 +831,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget movieCard(String title, String imgPath, String description) {
+  Widget movieCard(Movie movie) {
     return GestureDetector(
       onTap: () {
         // Navigate to the movie details screen
@@ -703,13 +841,13 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           children: [
             Image.network(
-              imgPath,
+              movie.imgPath,
               fit: BoxFit.cover,
               height: 120.0,
             ),
             SizedBox(height: 4),
             Text(
-              title,
+              movie.title,
               style: GoogleFonts.poppins().copyWith(
                 fontSize: 16,
               ),
@@ -718,5 +856,143 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+////////////////////////////////////////////////////////////////////
+
+//Tela de listas
+
+class ListScreen extends StatelessWidget {
+  const ListScreen({super.key, Key? keys});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        //AppBar para colocar a seta
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back,
+            ),
+            onPressed: () {
+              Navigator.of(context).pop(); // Voltar para a tela anterior
+            },
+            color: const Color(0xFF5E548E),
+            iconSize: 30,
+          ),
+        ),
+        body: SingleChildScrollView(
+            reverse: true,
+            child: Center(
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                  // Texto "Minhas Listas"
+                  Container(
+                    margin: const EdgeInsets.only(),
+                    child: Text(
+                      'Minhas Listas',
+                      style: GoogleFonts.poppins().copyWith(
+                        fontSize: 26,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ]))));
+  }
+}
+
+//////////////////////////////////////////////////////////////////////
+
+//Tela Adicionar Filme
+
+class AddMovieScreen extends StatelessWidget {
+  const AddMovieScreen({super.key, Key? keys});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        //AppBar para colocar a seta
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back,
+            ),
+            onPressed: () {
+              Navigator.of(context).pop(); // Voltar para a tela anterior
+            },
+            color: const Color(0xFF5E548E),
+            iconSize: 30,
+          ),
+        ),
+        body: SingleChildScrollView(
+            reverse: true,
+            child: Center(
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                  // Texto ""
+                  // Container(
+                  //   margin: const EdgeInsets.only(),
+                  //   child: Text(
+                  //     'Minhas Listas',
+                  //     style: GoogleFonts.poppins().copyWith(
+                  //       fontSize: 26,
+                  //       fontWeight: FontWeight.w600,
+                  //     ),
+                  //   ),
+                  // ),
+                ]))));
+  }
+}
+
+//////////////////////////////////////////////////////////////////////
+
+//Tela de Perfil
+
+class ProfileScreen extends StatelessWidget {
+  const ProfileScreen({super.key, Key? keys});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        //AppBar para colocar a seta
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back,
+            ),
+            onPressed: () {
+              Navigator.of(context).pop(); // Voltar para a tela anterior
+            },
+            color: const Color(0xFF5E548E),
+            iconSize: 30,
+          ),
+        ),
+        body: SingleChildScrollView(
+            reverse: true,
+            child: Center(
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                  // //Texto ""
+                  // Container(
+                  //   margin: const EdgeInsets.only(),
+                  //   child: Text(
+                  //     'Minhas Listas',
+                  //     style: GoogleFonts.poppins().copyWith(
+                  //       fontSize: 26,
+                  //       fontWeight: FontWeight.w600,
+                  //     ),
+                  //   ),
+                  // ),
+                ]))));
   }
 }
