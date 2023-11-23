@@ -811,7 +811,8 @@ class HomeScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ListScreen()),
+                  MaterialPageRoute(
+                      builder: (context) => WatchedMoviesScreen()),
                 );
               },
             ),
@@ -902,6 +903,177 @@ class ListScreen extends StatelessWidget {
                     ),
                   ),
                 ]))));
+  }
+}
+
+//////////////////////////////////////////////////////////////////////////
+
+//Tela da Lista Assistidos (falta criar a tela de listas para entrar nela)
+
+class WatchedMovies {
+  final String title;
+  final String rate;
+  final String imgPath;
+
+  WatchedMovies(this.title, this.rate, this.imgPath);
+}
+
+class WatchedMoviesScreen extends StatelessWidget {
+  const WatchedMoviesScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    List<WatchedMovies> movies = [
+      WatchedMovies('Pânico 6', '3.3/5',
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyvwZbtzQpeflX71rForQScUVAQC_UrOX14g&usqp=CAU'),
+      WatchedMovies('Filme 2', '4.0/5',
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyvwZbtzQpeflX71rForQScUVAQC_UrOX14g&usqp=CAU'),
+      WatchedMovies('Filme 3', '4.5/5',
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyvwZbtzQpeflX71rForQScUVAQC_UrOX14g&usqp=CAU'),
+      WatchedMovies('Filme 3', '4.5/5',
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyvwZbtzQpeflX71rForQScUVAQC_UrOX14g&usqp=CAU'),
+      WatchedMovies('Filme 3', '4.5/5',
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyvwZbtzQpeflX71rForQScUVAQC_UrOX14g&usqp=CAU'),
+      WatchedMovies('Filme 3', '4.5/5',
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyvwZbtzQpeflX71rForQScUVAQC_UrOX14g&usqp=CAU'),
+      WatchedMovies('Filme 3', '4.5/5',
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyvwZbtzQpeflX71rForQScUVAQC_UrOX14g&usqp=CAU'),
+      WatchedMovies('Filme 3', '4.5/5',
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyvwZbtzQpeflX71rForQScUVAQC_UrOX14g&usqp=CAU'),
+      WatchedMovies('Filme 3', '4.5/5',
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyvwZbtzQpeflX71rForQScUVAQC_UrOX14g&usqp=CAU'),
+      WatchedMovies('Filme 3', '4.5/5',
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyvwZbtzQpeflX71rForQScUVAQC_UrOX14g&usqp=CAU'),
+      WatchedMovies('Filme 3', '4.5/5',
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyvwZbtzQpeflX71rForQScUVAQC_UrOX14g&usqp=CAU'),
+      WatchedMovies('Filme 3', '4.5/5',
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyvwZbtzQpeflX71rForQScUVAQC_UrOX14g&usqp=CAU'),
+      WatchedMovies('Filme 3', '4.5/5',
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyvwZbtzQpeflX71rForQScUVAQC_UrOX14g&usqp=CAU'),
+    ];
+    return Scaffold(
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            pinned: true,
+            backgroundColor: Colors.white,
+            elevation: 0,
+            leading: IconButton(
+              icon: const Icon(
+                Icons.arrow_back,
+              ),
+              onPressed: () {
+                Navigator.of(context).pop(); // Go back to the previous screen
+              },
+              color: const Color(0xFF5E548E),
+              iconSize: 30,
+            ),
+            title: Container(
+              margin: const EdgeInsets.only(left: 60),
+              child: Text(
+                'Assistidos',
+                style: GoogleFonts.poppins(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+            expandedHeight: 50.0,
+          ),
+          SliverAppBar(
+            pinned: true,
+            backgroundColor: Colors.transparent,
+            flexibleSpace: Container(
+              decoration: BoxDecoration(
+                color: Colors.transparent,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(15.0, 0.0, 8.0, 0.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      flex: 3,
+                      child: Container(
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: Colors.grey[200],
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: const Row(
+                          children: [
+                            SizedBox(width: 8),
+                            Icon(
+                              Icons.search,
+                              color: Color(0xFF7D7D7D),
+                            ),
+                            SizedBox(width: 8),
+                            Expanded(
+                              child: TextField(
+                                decoration: InputDecoration(
+                                  hintText: 'Digite o nome do filme',
+                                  border: InputBorder.none,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 6),
+                    IconButton(
+                      icon: Icon(
+                        Icons.filter_alt_rounded,
+                        color: Color(0xFF9F86C0),
+                      ),
+                      onPressed: () {
+                        // Implement filter functionality here
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                return MovieCard(movies[index]);
+              },
+              childCount: movies.length,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget MovieCard(WatchedMovies movie) {
+    return Card(
+      child: ListTile(
+        contentPadding: EdgeInsets.symmetric(horizontal: 16),
+        leading: Image.network(
+          movie.imgPath,
+          width: 100.0,
+          height: 72.0,
+          fit: BoxFit.cover,
+        ),
+        title: Text(
+          movie.title,
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        subtitle: Text(
+          movie.rate,
+          style: TextStyle(
+            fontSize: 16,
+          ),
+        ),
+      ),
+    );
   }
 }
 
