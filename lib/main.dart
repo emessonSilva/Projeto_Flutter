@@ -453,8 +453,9 @@ class PasswordRecoveryScreen extends StatelessWidget {
 class Genre {
   final String name;
   final String emoji;
+  final int id;
 
-  Genre({required this.name, required this.emoji});
+  Genre({required this.name, required this.emoji, required this.id});
 }
 
 class GenreScreen extends StatefulWidget {
@@ -465,21 +466,21 @@ class GenreScreen extends StatefulWidget {
 }
 
 class _GenreScreenState extends State<GenreScreen> {
-  final List<bool> _isSelected = List.generate(12, (_) => false);
+  final List<Genre> selectedGenres = [];
 
   final List<Genre> genres = [
-    Genre(name: 'Musical', emoji: '🎶'),
-    Genre(name: 'Ação', emoji: '💥'),
-    Genre(name: 'Comédia', emoji: '🤣'),
-    Genre(name: 'Romance', emoji: '🥰'),
-    Genre(name: 'Drama', emoji: '😳'),
-    Genre(name: 'Ficção Científica', emoji: '👽'),
-    Genre(name: 'Animação', emoji: '😄'),
-    Genre(name: 'Fantasia', emoji: '😴'),
-    Genre(name: 'Documentário', emoji: '📖'),
-    Genre(name: 'Terror', emoji: '😱'),
-    Genre(name: 'Aventura', emoji: '🤠'),
-    Genre(name: 'História', emoji: '🦖'),
+    Genre(name: 'Musical', emoji: '🎶', id: 1),
+    Genre(name: 'Ação', emoji: '💥', id: 2),
+    Genre(name: 'Comédia', emoji: '🤣', id: 3),
+    Genre(name: 'Romance', emoji: '🥰', id: 4),
+    Genre(name: 'Drama', emoji: '😳', id: 5),
+    Genre(name: 'Ficção Científica', emoji: '👽', id: 6),
+    Genre(name: 'Animação', emoji: '😄', id: 7),
+    Genre(name: 'Fantasia', emoji: '😴', id: 8),
+    Genre(name: 'Documentário', emoji: '📖', id: 9),
+    Genre(name: 'Terror', emoji: '😱', id: 10),
+    Genre(name: 'Aventura', emoji: '🤠', id: 11),
+    Genre(name: 'História', emoji: '🦖', id: 12),
   ];
 
   @override
@@ -548,7 +549,8 @@ class _GenreScreenState extends State<GenreScreen> {
                         margin: const EdgeInsets.all(10.0),
                         decoration: BoxDecoration(
                           border: Border.all(
-                            color: _isSelected[index]
+                            color: selectedGenres.any(
+                                    (genre) => genre.id == genres[index].id)
                                 ? const Color(0xFF5E548E)
                                 : Colors.black26,
                           ),
@@ -557,7 +559,13 @@ class _GenreScreenState extends State<GenreScreen> {
                         child: InkWell(
                           onTap: () {
                             setState(() {
-                              _isSelected[index] = !_isSelected[index];
+                              int i = selectedGenres.indexWhere(
+                                  (genre) => genre.id == genres[index].id);
+                              if (i == -1) {
+                                selectedGenres.add(genres[index]);
+                              } else {
+                                selectedGenres.removeAt(i);
+                              }
                             });
                           },
                           child: Card(
@@ -586,7 +594,8 @@ class _GenreScreenState extends State<GenreScreen> {
                         margin: const EdgeInsets.all(10.0),
                         decoration: BoxDecoration(
                           border: Border.all(
-                            color: _isSelected[newIndex]
+                            color: selectedGenres.any(
+                                    (genre) => genre.id == genres[newIndex].id)
                                 ? const Color(0xFF5E548E)
                                 : Colors.black26,
                           ),
@@ -595,7 +604,13 @@ class _GenreScreenState extends State<GenreScreen> {
                         child: InkWell(
                           onTap: () {
                             setState(() {
-                              _isSelected[newIndex] = !_isSelected[newIndex];
+                              int i = selectedGenres.indexWhere(
+                                  (genre) => genre.id == genres[newIndex].id);
+                              if (i == -1) {
+                                selectedGenres.add(genres[newIndex]);
+                              } else {
+                                selectedGenres.removeAt(i);
+                              }
                             });
                           },
                           child: Card(
@@ -618,6 +633,35 @@ class _GenreScreenState extends State<GenreScreen> {
               ],
             ),
           ),
+          Container(
+            margin: const EdgeInsets.all(
+              80,
+            ),
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        GenreScreen(), //mudar para a página de recomendação de filmes quando for criada
+                  ),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF5E548E),
+                minimumSize: const Size(250, 50),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              child: Text(
+                'Continuar',
+                style: GoogleFonts.poppins().copyWith(
+                  fontSize: 18,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -625,6 +669,10 @@ class _GenreScreenState extends State<GenreScreen> {
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
+
+//Tela de Recomendação
+
+/////////////////////////////////////////////////////////////////////////////////////
 
 //Tela Home
 
@@ -703,7 +751,7 @@ class HomeScreen extends StatelessWidget {
         slivers: [
           SliverAppBar(
             pinned: true,
-            backgroundColor: Colors.transparent,
+            backgroundColor: Colors.white,
             flexibleSpace: Container(
               decoration: BoxDecoration(
                 color: Colors.transparent,
@@ -983,7 +1031,7 @@ class WatchedMoviesScreen extends StatelessWidget {
           ),
           SliverAppBar(
             pinned: true,
-            backgroundColor: Colors.transparent,
+            backgroundColor: Colors.white,
             flexibleSpace: Container(
               decoration: BoxDecoration(
                 color: Colors.transparent,
