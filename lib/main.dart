@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -459,7 +460,7 @@ class Genre {
 }
 
 class GenreScreen extends StatefulWidget {
-  const GenreScreen({Key? key}) : super(key: key);
+  const GenreScreen({super.key, Key? keys});
 
   @override
   _GenreScreenState createState() => _GenreScreenState();
@@ -689,7 +690,7 @@ class Movie {
 }
 
 class HomeScreen extends StatelessWidget {
-  HomeScreen({Key? key}) : super(key: key);
+  HomeScreen({super.key, Key? keys});
 
   final List<Movie> movies = [
     Movie(
@@ -808,7 +809,7 @@ class HomeScreen extends StatelessWidget {
             child: Container(
               margin: const EdgeInsets.all(8),
               child: Text(
-                'RECOMENDAÇÕES',
+                'MEUS FILMES',
                 style: GoogleFonts.poppins().copyWith(
                   fontSize: 22,
                   color: Colors.black,
@@ -967,7 +968,7 @@ class WatchedMovies {
 }
 
 class WatchedMoviesScreen extends StatelessWidget {
-  const WatchedMoviesScreen({Key? key}) : super(key: key);
+  const WatchedMoviesScreen({super.key, Key? keys});
 
   @override
   Widget build(BuildContext context) {
@@ -1087,7 +1088,19 @@ class WatchedMoviesScreen extends StatelessWidget {
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
-                return MovieCard(movies[index]);
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MovieDetailsScreen(
+                          movie: movies[index],
+                        ),
+                      ),
+                    );
+                  },
+                  child: MovieCard(movies[index]),
+                );
               },
               childCount: movies.length,
             ),
@@ -1120,6 +1133,77 @@ class WatchedMoviesScreen extends StatelessWidget {
             fontSize: 16,
           ),
         ),
+        trailing: IconButton(
+          icon: Icon(
+            Icons.delete,
+            color: Colors.red,
+          ),
+          onPressed: () {
+            // aqui implementar a função do ícone da lixeira
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class MovieDetailsScreen extends StatelessWidget {
+  final WatchedMovies movie;
+
+  MovieDetailsScreen({required this.movie});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            pinned: true,
+            backgroundColor: Colors.white,
+            elevation: 0,
+            leading: IconButton(
+              icon: const Icon(
+                Icons.arrow_back,
+              ),
+              onPressed: () {
+                Navigator.of(context).pop(); // Go back to the previous screen
+              },
+              color: const Color(0xFF5E548E),
+              iconSize: 30,
+            ),
+            title: Text(movie.title),
+          ),
+          SliverToBoxAdapter(
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.network(
+                    movie.imgPath,
+                    width: 400.0,
+                    height: 200.0,
+                    fit: BoxFit.cover,
+                  ),
+                  SizedBox(height: 16),
+                  Text(
+                    movie.title,
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    'Avaliação: ${movie.rate}',
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -1135,39 +1219,111 @@ class AddMovieScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        //AppBar para colocar a seta
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          leading: IconButton(
-            icon: const Icon(
-              Icons.arrow_back,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back,
+          ),
+          onPressed: () {
+            Navigator.of(context).pop(); // Voltar para a tela anterior
+          },
+          color: const Color(0xFF5E548E),
+          iconSize: 30,
+        ),
+        title: Container(
+          margin: const EdgeInsets.only(left: 40),
+          child: Text(
+            'Adicionar Filme',
+            style: GoogleFonts.poppins(
+              fontSize: 22,
+              fontWeight: FontWeight.w600,
+              color: Colors.black,
             ),
-            onPressed: () {
-              Navigator.of(context).pop(); // Voltar para a tela anterior
-            },
-            color: const Color(0xFF5E548E),
-            iconSize: 30,
           ),
         ),
-        body: SingleChildScrollView(
-            reverse: true,
-            child: Center(
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                  // Texto ""
-                  // Container(
-                  //   margin: const EdgeInsets.only(),
-                  //   child: Text(
-                  //     'Minhas Listas',
-                  //     style: GoogleFonts.poppins().copyWith(
-                  //       fontSize: 26,
-                  //       fontWeight: FontWeight.w600,
-                  //     ),
-                  //   ),
-                  // ),
-                ]))));
+      ),
+      body: SingleChildScrollView(
+        reverse: true,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: <Widget>[
+              Container(
+                child: ClipRRect(
+                  child: Container(
+                    width: 400,
+                    height: 200,
+                    decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(0.2),
+                    ),
+                    child: const Icon(
+                      Icons.movie,
+                      size: 80,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+              TextField(
+                decoration: InputDecoration(
+                  labelText: 'Título',
+                ),
+              ),
+              TextField(
+                decoration: InputDecoration(
+                  labelText: 'Gênero',
+                ),
+              ),
+              TextField(
+                decoration: InputDecoration(
+                  labelText: 'Direção',
+                ),
+              ),
+              TextField(
+                decoration: InputDecoration(
+                  labelText: 'Enredo',
+                ),
+              ),
+              TextField(
+                decoration: InputDecoration(
+                  labelText: 'Comentário',
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.all(
+                  80,
+                ),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => HomeScreen(),
+                      ),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF5E548E),
+                    minimumSize: const Size(250, 50),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  child: Text(
+                    'Salvar',
+                    style: GoogleFonts.poppins().copyWith(
+                      fontSize: 18,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
 
@@ -1177,11 +1333,9 @@ class AddMovieScreen extends StatelessWidget {
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key, Key? keys});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        //AppBar para colocar a seta
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
@@ -1195,24 +1349,71 @@ class ProfileScreen extends StatelessWidget {
             color: const Color(0xFF5E548E),
             iconSize: 30,
           ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginScreen()),
+                );
+              },
+              child: Text(
+                'Sair',
+                style: TextStyle(
+                  color: const Color(0xFF646464),
+                ),
+              ),
+            ),
+          ],
+          title: Container(
+            margin: const EdgeInsets.only(left: 70),
+            child: Text(
+              'Meu Perfil',
+              style: GoogleFonts.poppins(
+                fontSize: 22,
+                fontWeight: FontWeight.w600,
+                color: Colors.black,
+              ),
+            ),
+          ),
         ),
-        body: SingleChildScrollView(
-            reverse: true,
-            child: Center(
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                  // //Texto ""
-                  // Container(
-                  //   margin: const EdgeInsets.only(),
-                  //   child: Text(
-                  //     'Minhas Listas',
-                  //     style: GoogleFonts.poppins().copyWith(
-                  //       fontSize: 26,
-                  //       fontWeight: FontWeight.w600,
-                  //     ),
-                  //   ),
-                  // ),
-                ]))));
+        body: Center(
+          child: Container(
+            padding: const EdgeInsets.only(bottom: 500),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(30),
+                    child: Container(
+                      width: 110,
+                      height: 110,
+                      decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.2),
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                      child: const Icon(
+                        Icons.person,
+                        size: 80,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'Editar foto de perfil',
+                  style: GoogleFonts.poppins(
+                    fontSize: 14,
+                    color: const Color(0xFF646464),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ));
   }
 }
