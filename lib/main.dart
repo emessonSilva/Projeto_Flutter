@@ -907,7 +907,7 @@ class ListScreen extends StatelessWidget {
                 child: Text(
                   'Minhas Listas',
                   style: GoogleFonts.poppins().copyWith(
-                    fontSize: 26,
+                    fontSize: 30,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -923,7 +923,7 @@ class ListScreen extends StatelessWidget {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF5E548E),
+                    backgroundColor:  const Color(0xFF9F86C0),
                     minimumSize: const Size(300, 100),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -949,7 +949,7 @@ class ListScreen extends StatelessWidget {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF5E548E),
+                    backgroundColor:  const Color(0xFF9F86C0),
                     minimumSize: const Size(300, 100),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -975,7 +975,7 @@ class ListScreen extends StatelessWidget {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF5E548E),
+                    backgroundColor:  const Color(0xFF9F86C0),
                     minimumSize: const Size(300, 100),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -1000,7 +1000,7 @@ class ListScreen extends StatelessWidget {
 
 //////////////////////////////////////////////////////////////////////////
 
-//Tela da Lista Assistidos (falta criar a tela de listas para entrar nela)
+//Tela da Lista Assistidos 
 
 class WatchedMovies {
   final String title;
@@ -2030,9 +2030,15 @@ class FavoriteMovieDetailsScreen extends StatelessWidget {
 /////////////////////////////////////////////////////////////////////////
 
 //Tela Adicionar Filme
-
-class AddMovieScreen extends StatelessWidget {
+class AddMovieScreen extends StatefulWidget {
   const AddMovieScreen({Key? key}) : super(key: key);
+
+  @override
+  _AddMovieScreenState createState() => _AddMovieScreenState();
+}
+
+class _AddMovieScreenState extends State<AddMovieScreen> {
+  String selectedOption = ''; 
 
   @override
   Widget build(BuildContext context) {
@@ -2055,7 +2061,7 @@ class AddMovieScreen extends StatelessWidget {
           child: Text(
             'Adicionar Filme',
             style: TextStyle(
-              fontSize: 22,
+              fontSize: 24,
               fontWeight: FontWeight.w600,
               color: Colors.black,
             ),
@@ -2074,6 +2080,9 @@ class AddMovieScreen extends StatelessWidget {
             },
             onSelected: (String value) {
               // Lógica para lidar com a escolha selecionada
+              setState(() {
+                selectedOption = value;
+              });
               print('Selecionado: $value');
             },
           ),
@@ -2212,44 +2221,63 @@ class AddMovieScreen extends StatelessWidget {
   }
 
   // Função para mostrar as opções de avaliação ao clicar no ícone de mais
-  void OptionList(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      builder: (BuildContext builder) {
-        return Container(
-          child: Wrap(
-            children: <Widget>[
-              ListTile(
-                leading: Icon(Icons.circle_outlined),
-                title: Text('Assistidos'),
-                onTap: () {
-                  // Lógica para lidar com a escolha "Assistidos"
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.circle_outlined),
-                title: Text('Favoritos'),
-                onTap: () {
-                  // Lógica para lidar com a escolha "Favoritos"
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.circle_outlined),
-                title: Text('Não Assistidos'),
-                onTap: () {
-                  // Lógica para lidar com a escolha "Não Assistidos"
-                  Navigator.pop(context);
-                },
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
+void OptionList(BuildContext context) {
+  showModalBottomSheet(
+    context: context,
+    builder: (BuildContext builder) {
+      return Container(
+        child: Wrap(
+          children: <Widget>[
+            ListTile(
+              leading: Icon(Icons.circle,
+                  color: selectedOption == 'Assistidos'
+                      ? const Color(0xFF5E548E)
+                      : const Color(0xFF646464)),
+              title: Text('Assistidos'),
+              onTap: () {
+                // Lógica para lidar com a escolha "Assistidos"
+                setState(() {
+                  selectedOption = 'Assistidos';
+                });
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.circle,
+                  color: selectedOption == 'Favoritos'
+                      ? const Color(0xFF5E548E)
+                      : const Color(0xFF646464)),
+              title: Text('Favoritos'),
+              onTap: () {
+                // Lógica para lidar com a escolha "Favoritos"
+                setState(() {
+                  selectedOption = 'Favoritos';
+                });
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.circle,
+                  color: selectedOption == 'Não Assistidos'
+                      ? const Color(0xFF5E548E)
+                      : const Color(0xFF646464)),
+              title: Text('Não Assistidos'),
+              onTap: () {
+                // Lógica para lidar com a escolha "Não Assistidos"
+                setState(() {
+                  selectedOption = 'Não Assistidos';
+                });
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+      );
+    },
+  );
 }
+}
+
 
 //////////////////////////////////////////////////////////////////////
 
@@ -2285,6 +2313,7 @@ class ProfileScreen extends StatelessWidget {
                 'Sair',
                 style: TextStyle(
                   color: const Color(0xFF646464),
+                  fontSize: 18 ,
                 ),
               ),
             ),
@@ -2294,7 +2323,7 @@ class ProfileScreen extends StatelessWidget {
             child: Text(
               'Meu Perfil',
               style: GoogleFonts.poppins(
-                fontSize: 22,
+                fontSize: 24,
                 fontWeight: FontWeight.w600,
                 color: Colors.black,
               ),
@@ -2302,42 +2331,98 @@ class ProfileScreen extends StatelessWidget {
           ),
         ),
         body: Center(
-          child: Container(
-            padding: const EdgeInsets.only(bottom: 500),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(30),
-                    child: Container(
-                      width: 110,
-                      height: 110,
-                      decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.2),
-                        borderRadius: BorderRadius.circular(100),
-                      ),
-                      child: const Icon(
-                        Icons.person,
-                        size: 80,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  'Editar foto de perfil',
-                  style: GoogleFonts.poppins(
-                    fontSize: 14,
-                    color: const Color(0xFF646464),
-                  ),
-                ),
-              ],
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 20,
             ),
-          ),
-        ));
+            Container(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(30),
+                child: Container(
+                  width: 110,
+                  height: 110,
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                  child: const Icon(
+                    Icons.person,
+                    size: 80,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              'Editar foto de perfil',
+              style: GoogleFonts.poppins(
+                fontSize: 14,
+                color: const Color(0xFF646464),
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+              margin: const EdgeInsets.all(20),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => ProfileScreen(),
+                    ),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF9F86C0),
+                  minimumSize: const Size(300, 50),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                child: Text(
+                  ' Editar dados',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.all(20),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => ProfileScreen(),
+                    ),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF9F86C0),
+                  minimumSize: const Size(300, 50),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                child: Text(
+                  ' Perguntas frequentes',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
